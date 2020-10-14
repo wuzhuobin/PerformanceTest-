@@ -15,11 +15,21 @@ MainWindow::MainWindow( QWidget *parent ):
 
     d_panel = new Panel( w );
 
-    d_plot = new Plot( w );
+    // d_plot = new Plot( w );
+    for (int i = 0; i < 1; ++i)
+    {
+        this->mPlots << new Plot(w);
+    }
 
     QHBoxLayout *hLayout = new QHBoxLayout( w );
     hLayout->addWidget( d_panel );
-    hLayout->addWidget( d_plot, 10 );
+    // hLayout->addWidget( d_plot, 10 );
+    QVBoxLayout *pVLayout = new QVBoxLayout();
+    hLayout->addLayout(pVLayout, 2);
+    for( Plot* pPlot: this->mPlots)
+    {
+        pVLayout->addWidget(pPlot);
+    }
 
     setCentralWidget( w );
 
@@ -34,7 +44,7 @@ MainWindow::MainWindow( QWidget *parent ):
 
 bool MainWindow::eventFilter( QObject *object, QEvent *event )
 {
-    if ( object == d_plot->canvas() && event->type() == QEvent::Paint )
+    if ( object == this->mPlots.first()->canvas() && event->type() == QEvent::Paint )
     {
         static int counter;
         static QTime timeStamp;
@@ -68,9 +78,12 @@ bool MainWindow::eventFilter( QObject *object, QEvent *event )
 
 void MainWindow::applySettings( const Settings &settings )
 {
-    d_plot->setSettings( settings );
+    for(Plot *pPlot: this->mPlots)
+    {
+        pPlot->setSettings(settings);
 
-    // the canvas might have been recreated
-    d_plot->canvas()->removeEventFilter( this );
-    d_plot->canvas()->installEventFilter( this );
+        // the canvas might have been recreated
+        pPlot->canvas()->removeEventFilter(this);
+        pPlot->canvas()->installEventFilter(this);
+    }
 }

@@ -20,7 +20,8 @@ private Q_SLOTS:
     void applySettings( const Settings & );
 
 private:
-    Plot *d_plot;
+    // Plot *d_plot;
+    QList<Plot*> mPlots;
     Panel *d_panel;
     QLabel *d_frameCount;
 };
