@@ -20,9 +20,11 @@ void CircularBuffer::fill( double interval, size_t numPoints )
 
     if ( d_y )
     {
-        d_step = interval / ( numPoints - 2 );
+        d_step = interval / ( numPoints - 1 );
         for ( size_t i = 0; i < numPoints; i++ )
+        {
             d_values[i] = d_y( i * d_step );
+        }
     }
 
     d_interval = interval;

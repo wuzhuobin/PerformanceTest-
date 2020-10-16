@@ -7,7 +7,9 @@
 #include "panel.h"
 #include "plot.h"
 #include "mainwindow.h"
+#include "CPlot2.h"
 
+static const int NUM_OF_WAVE = 24;
 MainWindow::MainWindow( QWidget *parent ):
     QMainWindow( parent )
 {
@@ -16,19 +18,22 @@ MainWindow::MainWindow( QWidget *parent ):
     d_panel = new Panel( w );
 
     // d_plot = new Plot( w );
-    for (int i = 0; i < 1; ++i)
+    for (int i = 0; i < NUM_OF_WAVE; ++i)
     {
-        this->mPlots << new Plot(w);
+        // (i % 2 == 0) ? this->mPlots << new Plot(w) : this->mPlots << new CPlot2(w);
+        this->mPlots << new CPlot2(w);
+        // this->mPlots << new Plot(w);
     }
 
     QHBoxLayout *hLayout = new QHBoxLayout( w );
     hLayout->addWidget( d_panel );
-    // hLayout->addWidget( d_plot, 10 );
-    QVBoxLayout *pVLayout = new QVBoxLayout();
-    hLayout->addLayout(pVLayout, 2);
-    for( Plot* pPlot: this->mPlots)
+    QGridLayout *pGridLayout = new QGridLayout();
+    pGridLayout->setContentsMargins(0, 0, 0, 0);
+    hLayout->addLayout(pGridLayout, 2);
+    for(int i = 0; i < this->mPlots.size(); ++i)
     {
-        pVLayout->addWidget(pPlot);
+      this->mPlots[i]->setMaximumHeight(this->height() / this->mPlots.size() * 2);
+      pGridLayout->addWidget(this->mPlots[i], i / 2, i % 2);
     }
 
     setCentralWidget( w );

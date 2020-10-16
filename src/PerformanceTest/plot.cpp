@@ -1,4 +1,3 @@
-#include <qglobal.h>
 #include <qwt_painter.h>
 #include <qwt_plot_canvas.h>
 #include <qwt_plot_grid.h>
@@ -13,24 +12,6 @@
 #include "plot.h"
 #include "circularbuffer.h"
 #include "settings.h"
-
-static double wave( double x )
-{
-    const double period = 1.0;
-    const double c = 5.0;
-
-    double v = ::fmod( x, period );
-
-    const double amplitude = qAbs( x - qRound( x / c ) * c ) / ( 0.5 * c );
-    v = amplitude * qSin( v / period * 2 * M_PI );
-
-    return v;
-}
-
-static double noise( double )
-{
-    return 2.0 * ( qrand() / ( static_cast<double>( RAND_MAX ) + 1 ) ) - 1.0;
-}
 
 #ifndef QWT_NO_OPENGL
 class GLCanvas: public QwtPlotGLCanvas
@@ -61,6 +42,7 @@ protected:
     }
 };
 #endif
+
 
 Plot::Plot( QWidget *parent ):
     QwtPlot( parent ),

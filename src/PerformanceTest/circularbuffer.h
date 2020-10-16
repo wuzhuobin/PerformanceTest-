@@ -20,7 +20,7 @@ public:
 
     void setFunction( double( *y )( double ) );
 
-private:
+protected:
     double ( *d_y )( double );
 
     double d_referenceTime;
