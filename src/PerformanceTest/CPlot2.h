@@ -7,7 +7,7 @@ class CPlot2: public Plot
 {
   Q_OBJECT;
 public:
-  CPlot2(QWidget *pParent = nullptr);
+  explicit CPlot2(QWidget *pParent = nullptr);
 
 public Q_SLOTS:
   virtual void setSettings(const Settings & rSettings) override;

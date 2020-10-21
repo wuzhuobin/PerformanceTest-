@@ -7,55 +7,10 @@ CWaveBuffer::CWaveBuffer(double interval, size_t numPoints, bool left):
   CircularBuffer(interval, numPoints),
   mLeft(left)
 {}
-// CWaveBuffer::CWaveBuffer( double interval, size_t numPoints ):
-//   d_y( NULL ),
-//   d_referenceTime( 0.0 ),
-//   d_startIndex( 0 ),
-//   d_offset( 0.0 )
-// {
-//     fill( interval, numPoints );
-// }
-
-// void CWaveBuffer::fill( double interval, size_t numPoints )
-// {
-//     if ( interval <= 0.0 || numPoints < 2 )
-//         return;
-
-//     d_values.resize( numPoints );
-//     d_values.fill( 0.0 );
-
-//     if ( d_y )
-//     {
-//         d_step = interval / ( numPoints - 1 );
-//         for ( size_t i = 0; i < numPoints; i++ )
-//             d_values[i] = d_y( i * d_step );
-//     }
-
-//     d_interval = interval;
-// }
-
-// void CWaveBuffer::setFunction( double( *y )( double ) )
-// {
-//     d_y = y;
-// }
-
-// void CWaveBuffer::setReferenceTime( double timeStamp )
-// {
-//     d_referenceTime = timeStamp;
-
-//     const double startTime = ::fmod( d_referenceTime, d_values.size() * d_step );
-
-//     d_startIndex = static_cast<int>(::floor( startTime / d_step )); // floor
-//     d_offset = ::fmod( startTime, d_step );
-// }
-
-// double CWaveBuffer::referenceTime() const
-// {
-//     return d_referenceTime;
-// }
 
 size_t CWaveBuffer::size() const
 {
+  /// @todo NOT CORRECT
   size_t size = 0;
   if (this->mLeft)
   {
@@ -63,13 +18,15 @@ size_t CWaveBuffer::size() const
   }
   else
   {
-    size = static_cast<int>(this->d_values.size() * ( 1 - EMPTY_PERCENT) - this->d_startIndex);
+    int size_ = static_cast<int>(this->d_values.size() * ( 1 - EMPTY_PERCENT) - this->d_startIndex);
+    size = size_ < 0 ? 0 : size_;
   }
   return size;
 }
 
 QPointF CWaveBuffer::sample( size_t i ) const
 {
+  /// @todo NOT CORRECT
   double x;
   double y;
   if (this->mLeft)
@@ -86,8 +43,3 @@ QPointF CWaveBuffer::sample( size_t i ) const
   }
   return QPointF(x, y);
 }
-
-// QRectF CWaveBuffer::boundingRect() const
-// {
-//     return QRectF( -1.0, -d_interval, 2.0, d_interval );
-// }

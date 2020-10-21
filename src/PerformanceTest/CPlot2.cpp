@@ -33,7 +33,6 @@ CPlot2::CPlot2(QWidget *pParent):
 
 void CPlot2::setSettings(const Settings & s)
 {
-  Plot::setSettings(s);
     CircularBuffer *buffer2 = static_cast<CircularBuffer *>( this->mpCurve->data() );
     if ( s.curve.numPoints != buffer2->size() ||
             s.curve.functionType != d_settings.curve.functionType )

@@ -23,8 +23,9 @@ int main( int argc, char **argv )
     QApplication a( argc, argv );
 
     MainWindow mainWindow;
-    mainWindow.resize(1000, 1400);
-    mainWindow.show();
+    // mainWindow.resize(1000, 1400);
+    // mainWindow.show();
+    mainWindow.showMaximized();
 
     return a.exec();
 }

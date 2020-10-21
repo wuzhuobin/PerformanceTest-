@@ -5,9 +5,10 @@
 #include <qdatetime.h>
 #include <qwt_plot_canvas.h>
 #include "panel.h"
-#include "plot.h"
 #include "mainwindow.h"
 #include "CPlot2.h"
+#include "CPlot1.h"
+#include "CPlot3.h"
 
 static const int NUM_OF_WAVE = 24;
 MainWindow::MainWindow( QWidget *parent ):
@@ -22,7 +23,8 @@ MainWindow::MainWindow( QWidget *parent ):
     {
         // (i % 2 == 0) ? this->mPlots << new Plot(w) : this->mPlots << new CPlot2(w);
         this->mPlots << new CPlot2(w);
-        // this->mPlots << new Plot(w);
+        // this->mPlots << new CPlot3(w);
+        // this->mPlots << new CPlot1(w);
     }
 
     QHBoxLayout *hLayout = new QHBoxLayout( w );
