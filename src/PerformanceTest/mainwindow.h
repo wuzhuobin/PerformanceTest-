@@ -1,5 +1,5 @@
-#ifndef _MAIN_WINDOW_H_
-#define _MAIN_WINDOW_H_
+#ifndef MAIN_WINDOW_H
+#define MAIN_WINDOW_H
 
 #include <qmainwindow.h>
 
@@ -8,22 +8,22 @@ class Panel;
 class QLabel;
 class Settings;
 
-class MainWindow: public QMainWindow
+class MainWindow : public QMainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    MainWindow( QWidget *parent = NULL );
-    virtual bool eventFilter( QObject *, QEvent * );
+  explicit MainWindow(QWidget *pParent = nullptr);
+  virtual bool eventFilter(QObject *, QEvent *) override;
 
 private Q_SLOTS:
-    void applySettings( const Settings & );
+  void applySettings(const Settings &);
 
 private:
-    // Plot *d_plot;
-    QList<Plot*> mPlots;
-    Panel *d_panel;
-    QLabel *d_frameCount;
+  // Plot *d_plot;
+  QList<Plot *> mPlots;
+  Panel *d_panel;
+  QLabel *d_frameCount;
 };
 
 #endif

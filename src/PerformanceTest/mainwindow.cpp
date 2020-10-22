@@ -10,21 +10,20 @@
 #include "CPlot1.h"
 #include "CPlot3.h"
 
-static const int NUM_OF_WAVE = 24;
-MainWindow::MainWindow( QWidget *parent ):
-    QMainWindow( parent )
+static const int NUM_OF_WAVE = 2;
+MainWindow::MainWindow( QWidget *pParent ):
+    QMainWindow( pParent )
 {
     QWidget *w = new QWidget( this );
 
     d_panel = new Panel( w );
 
-    // d_plot = new Plot( w );
     for (int i = 0; i < NUM_OF_WAVE; ++i)
     {
         // (i % 2 == 0) ? this->mPlots << new Plot(w) : this->mPlots << new CPlot2(w);
+        this->mPlots << new CPlot1(w);
         this->mPlots << new CPlot2(w);
-        // this->mPlots << new CPlot3(w);
-        // this->mPlots << new CPlot1(w);
+        this->mPlots << new CPlot3(w);
     }
 
     QHBoxLayout *hLayout = new QHBoxLayout( w );

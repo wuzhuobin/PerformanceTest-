@@ -2,6 +2,8 @@
 
 // qt
 #include <QPaintEvent>
+// qwt
+#include <qwt_plot_grid.h>
 
 class CPlot3Data
 {
@@ -63,11 +65,11 @@ private:
   Function mfpY = nullptr;
 };
 
-class CPlot3Canvas: public QWidget
+class CPlot3Canvas: public QFrame
 {
   Q_OBJECT;
 public:
-  explicit CPlot3Canvas(QWidget *pParent = nullptr): QWidget(pParent) {}
+  explicit CPlot3Canvas(QWidget *pParent = nullptr): QFrame(pParent) {}
   CPlot3Data *GetData() { return &this->mData; }
   Q_INVOKABLE void replot()
   {
@@ -79,7 +81,7 @@ protected:
   {
     QPainter painter(this);
     painter.setPen(Qt::black);
-    return QWidget::paintEvent(pPaintEvent);
+    return QFrame::paintEvent(pPaintEvent);
   }
   
   CPlot3Data mData;
@@ -108,6 +110,10 @@ void CPlot3::setSettings( const Settings &s )
         killTimer( d_timerId );
 
     d_timerId = startTimer( s.updateInterval );
+
+    this->d_grid->setPen( s.grid.pen );
+    this->d_grid->setVisible( s.grid.pen.style() != Qt::NoPen );
+
     CPlot3Data *buffer = qobject_cast<CPlot3Canvas*>(this->canvas())->GetData();
     if ( s.curve.numPoints != buffer->GetSize() ||
             s.curve.functionType != d_settings.curve.functionType )

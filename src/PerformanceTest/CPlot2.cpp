@@ -1,5 +1,5 @@
 #include "CPlot2.h"
-#include "CWaveBuffer.h"
+#include "CPlot2Buffer.h"
 
 // qwt
 #include <qwt_text_label.h>
@@ -12,17 +12,17 @@ CPlot2::CPlot2(QWidget *pParent):
   mpCurve(new QwtPlotCurve)
 {
   this->d_curve->setTitle(QStringLiteral("Normal Curve"));
-  this->d_curve->setData(new CWaveBuffer(this->d_interval, 10, false));
+  this->d_curve->setData(new CPlo2Buffer(this->d_interval, 10, false));
 
   this->mpCurve->setTitle("Normal Curve");
   this->mpCurve->setPen(Qt::black);
-  this->mpCurve->setData(new CWaveBuffer(this->d_interval, 10, true));
+  this->mpCurve->setData(new CPlo2Buffer(this->d_interval, 10, true));
   this->mpCurve->attach(this);
 
   this->setTitle(QString());
   this->setFooter(QString());
   this->enableAxis(xTop, false);
-  this->enableAxis(xBottom, false);
+  // this->enableAxis(xBottom, false);
   this->enableAxis(yLeft, false);
   this->enableAxis(yRight, false);
   this->plotLayout()->setCanvasMargin(0);
@@ -67,7 +67,7 @@ void CPlot2::setSettings(const Settings & s)
 
 void CPlot2::timerEvent(QTimerEvent *pEvent)
 {
-  CWaveBuffer *pBuffer = static_cast<CWaveBuffer*>(this->mpCurve->data());
+  CPlo2Buffer *pBuffer = static_cast<CPlo2Buffer*>(this->mpCurve->data());
   pBuffer->setReferenceTime(this->d_clock.elapsed() / 1000.0);
   Plot::timerEvent(pEvent);
 }
