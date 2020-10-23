@@ -65,7 +65,6 @@ QPointF CircularBuffer::sample( size_t i ) const
 
     const double x = i * d_step - d_offset - d_interval;
     const double y = d_values.data()[index];
-
     return QPointF( x, y );
 }
 

@@ -6,6 +6,10 @@
 #include <qwt_plot_curve.h>
 #include <qwt_legend.h>
 #include <qwt_plot_layout.h>
+#include <qwt_plot_canvas.h>
+
+// qt
+#include <QDateTime>
 
 CPlot2::CPlot2(QWidget *pParent):
   Plot(pParent),
@@ -22,7 +26,7 @@ CPlot2::CPlot2(QWidget *pParent):
   this->setTitle(QString());
   this->setFooter(QString());
   this->enableAxis(xTop, false);
-  // this->enableAxis(xBottom, false);
+  this->enableAxis(xBottom, false);
   this->enableAxis(yLeft, false);
   this->enableAxis(yRight, false);
   this->plotLayout()->setCanvasMargin(0);
@@ -70,4 +74,11 @@ void CPlot2::timerEvent(QTimerEvent *pEvent)
   CPlo2Buffer *pBuffer = static_cast<CPlo2Buffer*>(this->mpCurve->data());
   pBuffer->setReferenceTime(this->d_clock.elapsed() / 1000.0);
   Plot::timerEvent(pEvent);
+  QwtPlotCanvas *plotCanvas = qobject_cast<QwtPlotCanvas *>( canvas() );
+  // qDebug() << plotCanvas;
+  // qDebug() << plotCanvas->backingStore();
+  // if (plotCanvas && plotCanvas->backingStore())
+  // {
+  //   plotCanvas->backingStore()->save(QDateTime::currentDateTime().toString() + ".png");
+  // }
 }

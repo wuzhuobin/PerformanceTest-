@@ -22,7 +22,7 @@ public Q_SLOTS:
     virtual void setSettings( const Settings & );
 
 protected:
-    virtual void timerEvent( QTimerEvent *e );
+    virtual void timerEvent(QTimerEvent *e) override;
 
     void alignScales();
 

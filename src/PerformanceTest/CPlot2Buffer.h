@@ -7,7 +7,7 @@ class CPlo2Buffer : public CircularBuffer
 {
 
 public:
-  CPlo2Buffer(double interval = 10.0, size_t numPoints = 1000, bool left = true);
+  explicit CPlo2Buffer(double interval = 10.0, size_t numPoints = 1000, bool left = true);
 
   virtual size_t size() const override;
   virtual QPointF sample(size_t i) const override;
