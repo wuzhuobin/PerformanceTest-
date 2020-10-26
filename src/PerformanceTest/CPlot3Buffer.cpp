@@ -8,7 +8,7 @@ CPlot3Buffer::CPlot3Buffer(double interval, size_t numPoints):
 
 size_t CPlot3Buffer::size() const
 {
-  return this->d_values.size() * EMPTY_PERCENT * 2;
+  return 10;
 }
 
 QPointF CPlot3Buffer::sample(size_t i) const
@@ -23,4 +23,5 @@ QPointF CPlot3Buffer::sample(size_t i) const
   const double x = (i + this->d_startIndex) * this->d_step - d_interval;
   const double y = this->d_values.data()[index];
   return QPointF(x, y);
+
 }

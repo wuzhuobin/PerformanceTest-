@@ -10,7 +10,7 @@
 #include "CPlot1.h"
 #include "CPlot3.h"
 
-static const int NUM_OF_WAVE = 24;
+static const int NUM_OF_WAVE = 1;
 MainWindow::MainWindow( QWidget *pParent ):
     QMainWindow( pParent )
 {
@@ -21,8 +21,8 @@ MainWindow::MainWindow( QWidget *pParent ):
     for (int i = 0; i < NUM_OF_WAVE; ++i)
     {
         // (i % 2 == 0) ? this->mPlots << new Plot(w) : this->mPlots << new CPlot2(w);
-        // this->mPlots << new CPlot1(w);
-        // this->mPlots << new CPlot2(w);
+        this->mPlots << new CPlot1(w);
+        this->mPlots << new CPlot2(w);
         this->mPlots << new CPlot3(w);
     }
 

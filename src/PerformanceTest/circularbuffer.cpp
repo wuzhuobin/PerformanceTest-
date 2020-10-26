@@ -71,4 +71,5 @@ QPointF CircularBuffer::sample( size_t i ) const
 QRectF CircularBuffer::boundingRect() const
 {
     return QRectF( -1.0, -d_interval, 2.0, d_interval );
+    // return qwtBoundingRect(*this);
 }

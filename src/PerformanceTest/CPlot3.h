@@ -15,9 +15,9 @@ public:
 
 protected:
   virtual void timerEvent(QTimerEvent *pEvent) override;
-  void DirectPaint();
+  // void DirectPaint();
 
-  QwtPlotDirectPainter *mpDirectPainter;
+  // QwtPlotDirectPainter *mpDirectPainter;
 };
 
 #endif //!C_PLOT3_H
