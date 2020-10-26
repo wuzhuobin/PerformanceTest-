@@ -43,4 +43,8 @@ if(BUILD_DOC)
   add_subdirectory(doc)
 endif()
 
+if(DEFINED ENV{OE_CMAKE_TOOLCHAIN_FILE})
+  include(toolchain.cmake)
+endif()
+
 add_subdirectory(src/PerformanceTest)
