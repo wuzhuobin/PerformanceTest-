@@ -39,7 +39,8 @@ void CircularBuffer::setReferenceTime( double timeStamp )
 {
     d_referenceTime = timeStamp;
 
-    const double startTime = ::fmod( d_referenceTime, d_values.size() * d_step );
+    // const double startTime = ::fmod( d_referenceTime, d_values.size() * d_step );
+    const double startTime = ::fmod( d_referenceTime, d_interval );
 
     d_startIndex = int( startTime / d_step ); // floor
     d_offset = ::fmod( startTime, d_step );

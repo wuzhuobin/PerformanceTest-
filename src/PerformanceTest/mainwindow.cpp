@@ -10,7 +10,7 @@
 #include "CPlot1.h"
 #include "CPlot3.h"
 
-static const int NUM_OF_WAVE = 24;
+static const int NUM_OF_WAVE = 1;
 MainWindow::MainWindow( QWidget *pParent ):
     QMainWindow( pParent )
 {

@@ -10,7 +10,7 @@ public:
     CircularBuffer( double interval = 10.0, size_t numPoints = 1000 );
     void fill( double interval, size_t numPoints );
 
-    void setReferenceTime( double );
+    virtual void setReferenceTime( double );
     double referenceTime() const;
 
     virtual size_t size() const;

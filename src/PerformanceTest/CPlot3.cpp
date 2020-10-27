@@ -10,67 +10,6 @@
 // #include <qwt_plot_directpainter.h>
 #include <qwt_plot_canvas.h>
 
-// class CPlot3Data
-// {
-// public:
-//   typedef double(*Function)(double);
-//   explicit CPlot3Data(double interval = 10.0, size_t numPoints = 1000)
-//   {
-//     this->fill(interval, numPoints);
-//   }
-
-//   void fill(double interval, size_t numPoints)
-//   {
-//     if ( interval <= 0.0 || numPoints < 2 )
-//         return;
-
-//     this->mValues.resize( numPoints );
-//     this->mValues.fill( 0.0 );
-
-//     if ( this->mfpY )
-//     {
-//         this->mStep = interval / ( numPoints - 1 );
-//         for ( size_t i = 0; i < numPoints; i++ )
-//         {
-//             this->mValues[i] = this->mfpY( i * this->mStep );
-//         }
-//     }
-
-//     this->mInterval = interval;
-//   }
-
-//   void setFunction(Function fpY)
-//   {
-//     this->mfpY = fpY;
-//   }
-
-//   void setReferenceTime(double timeStamp)
-//   {
-//     this->mReferenceTime = timeStamp;
-
-//     const double startTime = ::fmod( this->mReferenceTime, this->mValues.size() * this->mStep );
-
-//     this->mStartIndex = int( startTime / this->mStep ); // floor
-//     this->mOffset = ::fmod( startTime, this->mStep );
-//   }
-
-//   size_t GetSize() const
-//   {
-//     return this->mValues.size();
-//   }
-
-
-// private:
-//   double mReferenceTime = 0.0;
-//   double mInterval = 0.0;
-//   QVector<double> mValues;
-//   double mStep;
-//   int mStartIndex = 0;
-//   double mOffset = 0.0;
-//   Function mfpY = nullptr;
-// };
-
-#include <QTime>
 class CPlot3Canvas: public QwtPlotCanvas
 {
   Q_OBJECT;
@@ -80,7 +19,7 @@ public Q_SLOTS:
   void replot(const QRect &rect)
   {
     this->invalidateBackingStore();
-    if (testPaintAttribute(QwtPlotCanvas::ImmediatePaint))
+    if (this->testPaintAttribute(QwtPlotCanvas::ImmediatePaint))
     {
       this->repaint(rect);
     }
@@ -126,7 +65,6 @@ void CPlot3::timerEvent(QTimerEvent *pEvent)
   QRect rect = plotCanvas->contentsRect();
   double moveLeft = 1 + rect.width() * fmod(elapsed / 1000.0, this->d_interval) / this->d_interval; 
   double width = rect.width() * 0.1;
-  // qDebug() << "moveLeft: " << moveLeft;
   // qDebug() << "width: " << width;
   rect.moveLeft(moveLeft);
   rect.setWidth(width);
@@ -144,8 +82,3 @@ void CPlot3::timerEvent(QTimerEvent *pEvent)
     this->replot();
   }
 }
-
-// void CPlot3::DirectPaint()
-// {
-//   this->mpDirectPainter->drawSeries(this->d_curve, 0, this->d_curve->dataSize() - 1);
-// }
