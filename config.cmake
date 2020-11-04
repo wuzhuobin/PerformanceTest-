@@ -1,4 +1,5 @@
 set(Qt5Core_DIR /home/wuzhuobin/Qt5.12.7/5.12.7/gcc_64/lib/cmake/Qt5Core CACHE PATH "")
+set(Qt5Test_DIR /home/wuzhuobin/Qt5.12.7/5.12.7/gcc_64/lib/cmake/Qt5Test CACHE PATH "")
 set(Qt5Widgets_DIR /home/wuzhuobin/Qt5.12.7/5.12.7/gcc_64/lib/cmake/Qt5Widgets CACHE PATH "")
 set(Qt5OpenGL_DIR /home/wuzhuobin/Qt5.12.7/5.12.7/gcc_64/lib/cmake/Qt5OpenGL CACHE PATH "")
 set(QWT_LIBRARY /home/wuzhuobin/ccode/qwt-6.1.4/install/qwt-6.1.4/lib/libqwt.so.6.1.4 CACHE FILEPATH "")
