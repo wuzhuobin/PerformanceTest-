@@ -2,7 +2,7 @@
 
 
 static const double EMPTY_PERCENT = 0.1;
-static const int EXTENDED_WAVE = 3;
+static const double EXTENDED_WAVE = 0.005;
 CPlot3Buffer::CPlot3Buffer(double interval, size_t numPoints):
   CircularBuffer(interval, numPoints)
 {}
@@ -18,7 +18,7 @@ size_t CPlot3Buffer::size() const
   size_t size_ = this->d_startIndex - this->mOldStartIndex;
   size_ = size_ > 0 ? size_ : this->d_startIndex - this->mOldStartIndex + this->d_interval;
   size_ = size_ > 1 ? size_ : 1;
-  size_+= EXTENDED_WAVE * 2;
+  size_ += this->d_values.size() * EXTENDED_WAVE * 2;
   return size_;
 }
 
@@ -26,12 +26,12 @@ QPointF CPlot3Buffer::sample(size_t i) const
 {
   const int size = d_values.size();
 
-  int index = this->d_startIndex + i - 3;
+  int index = this->d_startIndex + i - this->d_values.size() * EXTENDED_WAVE;
   if (index >= size)
   {
     index -= size;
   }
-  const double x = (i + this->d_startIndex - EXTENDED_WAVE) * this->d_step - d_interval;
+  const double x = (i + this->d_startIndex - this->d_values.size() * EXTENDED_WAVE) * this->d_step - d_interval;
   const double y = this->d_values.data()[index];
   // if (i == 0)
   // {

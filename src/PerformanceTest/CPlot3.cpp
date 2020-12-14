@@ -58,19 +58,15 @@ CPlot3::CPlot3(QWidget *pParent): Plot(pParent)
 void CPlot3::timerEvent(QTimerEvent *pEvent)
 {
   CircularBuffer *buffer = static_cast<CircularBuffer *>( d_curve->data() );
-  // qDebug() << "boundingRect: " << buffer->boundingRect();
   double elapsed = this->d_clock.elapsed();
   buffer->setReferenceTime( elapsed / 1000.0 );
   QwtPlotCanvas *plotCanvas = qobject_cast<QwtPlotCanvas *>(canvas());
   QRect rect = plotCanvas->contentsRect();
   double moveLeft = 1 + rect.width() * fmod(elapsed / 1000.0, this->d_interval) / this->d_interval; 
   double width = rect.width() * 0.1;
-  // qDebug() << "width: " << width;
   rect.moveLeft(moveLeft);
   rect.setWidth(width);
-  // qDebug() << rect;
-  // this->mpDirectPainter->setClipRegion(QRegion(rect));
-  // = fmod(d_clock.elapsed() / 1000.0, this->d_interval);
+
   if (d_settings.updateType == Settings::RepaintCanvas)
   {
     // the axes in this example doesn't change. So all we need to do
